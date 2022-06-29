@@ -28,26 +28,30 @@
    1. cookie 有效的域
    2. 发送到这个域的所有请求都会携带对应的 cookie
    3. 这个值可能包含子域（如 www.wrox.com）,也可以不包含(如 .wrox.com 表示对 wrox.com 的所有子域都有效)
-   4. 如果不明确设置，则默认为设置 cookie 的域
-   5. Domin 是域名，Path 是路径，两者一起来限制 cookie 能被哪些 URL 访问
-   6. 若请求的 URL 是 Domin 或其子域，切 URL 的路径是 Path 或子路径，则就可以访问此 cookie
-   7. 跨域请求，默认不携带 cookie
-5. 路径, path
+   4. Domin 是域名，Path 是路径，两者一起来限制 cookie 能被哪些 URL 访问
+   5. 若请求的 URL 是 Domin 或其子域，切 URL 的路径是 Path 或子路径，则就可以访问此 cookie
+   6. 跨域请求，默认不携带 cookie
+   7. 若不指定，默认为创建 Cookie 的服务器的域名
+5. path, 路径
    1. 请求 URL 中包含这个路径才会把 cookie 发送到服务器
-6. Expires、Max Age，过期时间
+   2. 若不指定，默认为文档所在的目录
+6. Expires、Max Age，Cookie 过期时间
    1. 表示何时删除 cookie 的时间戳(即什么时间之后就不发送到服务器了)
    2. 默认情况下，浏览器会话结束后会删除所有 cookie。不过，也可以设置删除 cookie 的时间
    3. 把过期时间设置为过去的时间会立即删除 cookie
    4. Expires，cookie 的失效时间，GMT格式的时间
    5. Max Age，以秒为单位的时间段，默认-1，会话结束即失效
+   6. 若不指定，默认为浏览器关闭前为止
 7. secure, 安全标志
    1. 设置之后，只在使用 SSL 安全连接的情况下才会把 cookie 发送到服务器
    2. secure 属性用来设置 cookie 只有在确保安全的请求中才会发送。即当请求是 https 或者其它安全协议时，包含 secure 属性的 cookie 才会被发送到服务器
+   3. ` Set-Cookie: name=value; secure`
 8. HttpOnly
    1. 只能在服务器上读取, JavaScript 无法取得这种 cookie 的值
    2. 设置 cookie 是否能通过 js 去访问
    3. 当 cookie 携带 httpOnly 属性时，客户端无法通过 js 代码去访问（读取、修改、删除）这个 cookie
-   4. 减少 XSS 攻击
+   4. 减少跨站脚本攻击(XSS)对 Cookie 的信息窃取
+   5. ` Set-Cookie: name=value; HttpOnly`
 9. samesize
    1. 不能在跨域请求中携带 cookie
    2. 减少 CSRF 攻击 
@@ -109,7 +113,9 @@
       }
    ```
 
-
+## HTTP 首部
+1. Set-Cookie, 响应头
+2. Cookie，请求头，可以有多个 Cookie 头
 
 ## 缺点
 1. 每个域名下的 cooke 数量有限
