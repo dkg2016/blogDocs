@@ -1,16 +1,8 @@
 # Cookie
-* 最初用于在客户端存储会话信息，用来和 server 通讯
+* [MDN 上的 Cookie](https://developer.mozilla.org/zh-CN/docs/web/http/headers/cookie)
+* 用于在客户端存储会话信息，用来和 server 端通讯
 * 与特定域绑定，只对被认可的接收者开放，不被其他域访问
-* 被“借用”到本地存储
-* 浏览器中的 JS 可以使用 ` document.cookie = '' `
-* 分号分隔，键值对
-* 最大 4kb
-* API 简陋
-* 请求的时候自动发送，增加了请求数量
-* 由 Web 服务器存储在客户端的一段数据
-* 可以保存登陆凭证等信息
-* 下次进来会马上使用，自动随请求发送
-* 设计用来在服务端和客户端进行信息传递
+* 使基于无状态的 HTTP 协议记录稳定的状态信息成为了可能
 
 ## 构成
 1. 组成
@@ -27,13 +19,17 @@
 4. Domain, 域
    1. cookie 有效的域
    2. 发送到这个域的所有请求都会携带对应的 cookie
-   3. 这个值可能包含子域（如 www.wrox.com）,也可以不包含(如 .wrox.com 表示对 wrox.com 的所有子域都有效)
+   3. 这个值可能包含子域（如 www.example.com）,也可以不包含(如 .example.com 表示对 wrox.com 的所有子域都有效)
    4. 如果不明确设置，则默认为设置 cookie 的域
    5. Domin 是域名，Path 是路径，两者一起来限制 cookie 能被哪些 URL 访问
-   6. 若请求的 URL 是 Domin 或其子域，切 URL 的路径是 Path 或子路径，则就可以访问此 cookie
+   6. 若请求的 URL 是 Domin 或其子域，且 URL 的路径是 Path 或子路径，则就可以访问此 cookie
    7. 跨域请求，默认不携带 cookie
 5. 路径, path
    1. 请求 URL 中包含这个路径才会把 cookie 发送到服务器
+   2. 设置 ` Path=/docs `, 则以下地址都会匹配
+      1. /docs
+      2. /docs/Web/
+      3. /docs/Web/HTTP
 6. Expires、Max Age，过期时间
    1. 表示何时删除 cookie 的时间戳(即什么时间之后就不发送到服务器了)
    2. 默认情况下，浏览器会话结束后会删除所有 cookie。不过，也可以设置删除 cookie 的时间
@@ -48,9 +44,15 @@
    2. 设置 cookie 是否能通过 js 去访问
    3. 当 cookie 携带 httpOnly 属性时，客户端无法通过 js 代码去访问（读取、修改、删除）这个 cookie
    4. 减少 XSS 攻击
-9. samesize
-   1. 不能在跨域请求中携带 cookie
-   2. 减少 CSRF 攻击 
+9. SameSite
+   1. 允许服务器要求某个 cookie 在跨站请求时不会被发送
+   2. 不能在跨域请求中携带 cookie
+   3. 减少跨站请求伪造(CSRF) 攻击
+   4. 三种值： 
+      1. None，SameSite 为 None，则必须设置 Secure 属性
+      2. Strict，最严格，完全禁止第三方 Cookie，跨站点时，任何情况下都不会发送 Cookie
+      3. Lax： 大多数情况也是不发送第三方 Cookie，但是导航到目标网址的 Get 请求（链接，预加载请求，GET 表单）除外
+   5. [Cookie 的 SameSite 属性](http://www.ruanyifeng.com/blog/2019/09/cookie-samesite.html)
 
 ## 使用
 1. 设置 ` document.cookie ` 不会覆盖之前存在的任何 cookie，除非设置了已有的 cookie
@@ -115,5 +117,6 @@
 1. 每个域名下的 cooke 数量有限
 2. 储存量太小，只有 4kb
 3. 每次 http 请求都会携带发送，影响效率
-4. 客户端需要自己封装获取、设置、删除 cookie 的方法
-5. 浏览器有自己的想法
+4. API 简陋，部分 cookie 可以通过 ` document.cookie ` 访问，
+5. 客户端需要自己封装获取、设置、删除 cookie 的方法
+6. 浏览器有自己的想法
