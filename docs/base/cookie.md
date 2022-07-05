@@ -36,9 +36,11 @@
    3. 把过期时间设置为过去的时间会立即删除 cookie
    4. Expires，cookie 的失效时间，GMT格式的时间
    5. Max Age，以秒为单位的时间段，默认-1，会话结束即失效
+   6. 若不指定，默认为浏览器关闭前为止
 7. secure, 安全标志
    1. 设置之后，只在使用 SSL 安全连接的情况下才会把 cookie 发送到服务器
    2. secure 属性用来设置 cookie 只有在确保安全的请求中才会发送。即当请求是 https 或者其它安全协议时，包含 secure 属性的 cookie 才会被发送到服务器
+   3. ` Set-Cookie: name=value; secure`
 8. HttpOnly
    1. 只能在服务器上读取, JavaScript 无法取得这种 cookie 的值
    2. 设置 cookie 是否能通过 js 去访问
@@ -111,7 +113,9 @@
       }
    ```
 
-
+## HTTP 首部
+1. Set-Cookie, 响应头
+2. Cookie，请求头，可以有多个 Cookie 头
 
 ## 缺点
 1. 每个域名下的 cooke 数量有限
