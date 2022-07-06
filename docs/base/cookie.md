@@ -124,3 +124,20 @@
 4. API 简陋，部分 cookie 可以通过 ` document.cookie ` 访问，
 5. 客户端需要自己封装获取、设置、删除 cookie 的方法
 6. 浏览器有自己的想法
+
+## 应用
+1. 保持会话
+2. 记录用户偏好
+   1. [微软 Clarity](https://clarity.microsoft.com/)
+      1. 加载一张 GIF, 注入 Cookie
+         ```json{16-17}
+         // General
+         Request URL: https://c.clarity.ms/c.gif
+         Request Method: GET
+
+         // Response Headers
+         set-cookie: SM=T; domain=c.clarity.ms; path=/; SameSite=None; Secure;
+         set-cookie: MUID=3E5DF89C52536*********; domain=.clarity.ms; expires=Mon, 31-Jul-2023 02:59:35 GMT; path=/; SameSite=None; Secure; 
+         ```
+         MUID 设置了 domain 为 ` .clarity.ms `，且 path 为 ` / `，SameSite 为 ` None `，意味着对 ` clarity.ms ` 子域下的请求，都会携带此 cookie
+      2. 定时向 ` https://h.clarity.ms/collect ` 发送请求，携带 cookie，记录用户行为

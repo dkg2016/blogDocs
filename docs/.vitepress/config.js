@@ -2,7 +2,7 @@ export default {
   title: '记录',
   description: 'Just playing around!',
   themeConfig: {
-    siteTitle: 'My title',
+    siteTitle: 'Random Doc',
     nav: [
       { text: '基础', link: '/base/'},
       // { 
