@@ -5,6 +5,12 @@ export default {
     siteTitle: 'Random Doc',
     nav: [
       { text: '基础', link: '/base/'},
+      { 
+        text: '其它', 
+        items: [
+          { text: '性能优化', link: '/other/performance/first-load.md'},
+        ]
+      },
       // { 
       //   text: 'Drop Down',
       //   items: [
@@ -29,12 +35,11 @@ export default {
           ]
         }
       ],
-      '/two/': [
+      '/other/performance/': [
         { 
-          text: 'Two',
+          text: '性能优化',
           items: [
-            { text: 'Introduction', link: '/two/' },
-            { text: 'Getting Started', link: '/two/' },
+            { text: '首屏加载', link: '/other/performance/first-load' }
           ]
         }
       ]
