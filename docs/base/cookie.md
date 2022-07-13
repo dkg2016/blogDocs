@@ -126,9 +126,18 @@
 6. 浏览器有自己的想法
 
 ## 应用
-1. 保持会话
-2. 记录用户偏好
-   1. [微软 Clarity](https://clarity.microsoft.com/)
+### 保持会话
+   * 小程序和内部 H5 的 cookie 问题  
+   > 小程序进入内部 WebView 中的 H5，是没有自动注入 cookie 这一说的。在 h5 中要继续保持会话，面临如何保持和小程序中一样的身份（cookie）的问题
+   1. 通过跳转链接拼接 cookie 进去。但是需要额外的拼接、解析操作。以及 cookie 过大带来的隐藏风险
+   2. 在 h5 内发起一个请求，设置 cookie。需要进入 h5 时，携带用户的登录 code（wx.login 的结果），使用 code 发起用户登录，在响应中自动设置 cookie，再发起其他请求；
+   
+   ::: warning 注意
+   微信限制，code 只可使用一次
+   :::
+
+### 记录用户偏好
+   * [微软 Clarity 行为记录](https://clarity.microsoft.com/)
       1. 加载一张 GIF, 注入 Cookie
          ```json{16-17}
          // General

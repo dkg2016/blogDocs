@@ -1,14 +1,14 @@
 export default {
-  title: '记录',
+  title: 'RANDOM',
   description: 'Just playing around!',
   themeConfig: {
     siteTitle: 'Random Doc',
     nav: [
-      { text: '基础', link: '/base/'},
+      { text: '日常记录', link: '/base/cookie'},
       { 
         text: '其它', 
         items: [
-          { text: '性能优化', link: '/other/performance/first-load.md'},
+          { text: '首屏加载', link: '/other/performance/first-load.md'},
         ]
       },
       // { 
@@ -28,16 +28,14 @@ export default {
     sidebar: {
       '/base/': [
         {
-          text: '基础知识',
+          text: '',
           items: [
-            { text: 'Cookie', link: '/base/cookie' },
-            { text: 'Storage', link: '/base/storage' },
+            { text: 'Cookie 相关', link: '/base/cookie' }
           ]
         }
       ],
       '/other/performance/': [
-        { 
-          text: '性能优化',
+        {
           items: [
             { text: '首屏加载', link: '/other/performance/first-load' }
           ]
@@ -54,5 +52,9 @@ export default {
     //   pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',
     //   text: 'Edit this page on GitHub'
     // }
+  },
+  markdown: {
+    theme: 'material-palenight',
+    lineNumbers: true
   }
 }
