@@ -28,3 +28,46 @@
 1. 事件在同一个域下的不同页面之间触发，即在 A 页面注册了 storge 的监听处理，只有在跟 A 同域名下的 B 页面操作 storage 对象，A 页面才会被触发 storage 事件
 2. 监听页面的 ` storage ` 事件， ` window.addEventListener("storage", event => console.log(event); `
 
+## Storage 设置过期时间
+Storage 除非删除，一直有效，有时候需要设置一个过期时间。就像 cookie 一样，每次使用 Storage 时，如果已经超过设置的有效时间，则不要使用缓存。核心就是，在设置缓存时，多设置一个过期字段。
+* 一个微信小程序位置缓存的例子
+
+```js {6-13,26-27}
+// 获取缓存
+getUserPosition() {
+   wx.getStorage({
+      key: 'POSITION',
+      success: res => {
+         const storagePosition = JSON.parse(res.data);
+         // 缓存 过期
+         if (Date.now() > storagePosition.expiredTime) {
+            // 重新获取位置，更新缓存
+            this.updateUserPosition();
+         } else {
+            // 缓存未过期，可以直接使用
+         }
+      },
+      fail: _ => {
+         // 重新获取位置，更新缓存
+         this.updateUserPosition();
+      }
+   });
+}
+
+// 更新缓存
+updateUserPosition() {
+   wx.getLocation({
+      success: position => {
+         // 设置过期时间
+         position.expiredTime = Date.now() + 24 * 3600 * 1000;
+         wx.setStorage({
+            key: 'POSITION',
+            data: JSON.stringify(position)
+         });
+      },
+      fail: err => {
+         // location permisson denied
+      }
+   })
+}
+```
