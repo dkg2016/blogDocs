@@ -8,7 +8,8 @@ export default {
       { 
         text: '其它', 
         items: [
-          { text: '首屏加载', link: '/other/performance/first-load.md'},
+          { text: '首屏加载', link: '/other/first-load.md'},
+          { text: '选座 H5', link: '/other/chose-seat.md' }
         ]
       },
       // { 
@@ -34,24 +35,15 @@ export default {
           ]
         }
       ],
-      '/other/performance/': [
+      '/other/': [
         {
           items: [
-            { text: '首屏加载', link: '/other/performance/first-load' }
+            { text: '首屏加载', link: '/other/first-load' },
+            { text: '选座 H5', link: '/other/chose-seat.md' }
           ]
         }
       ]
     },
-    // socialLinks: [
-    //   { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
-    //   { icon: 'twitter', link: '...' },
-    //   { icon: 'discord', link: '...' },
-    //   { icon: 'youtube', link: '...' },
-    // ],
-    // editLink: {
-    //   pattern: 'https://github.com/vuejs/vitepress/edit/main/docs/:path',
-    //   text: 'Edit this page on GitHub'
-    // }
   },
   markdown: {
     theme: 'material-palenight',
