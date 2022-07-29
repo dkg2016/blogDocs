@@ -6,8 +6,8 @@
 ## 效果图
 
 <div style="display: flex; justify-content: space-around">
-  <img width="300" src="../../assets/seat-init.jpg">
-  <img width="300" src="../../assets/seat-select.jpg">
+  <img width="300" src="/assets/seat-init.jpg">
+  <img width="300" src="/assets/seat-select.jpg">
 </div>
 
 ## 一、SVG 图的制作
@@ -211,20 +211,22 @@ seatDOM.addEventListener('click', () => {
 </div>
 
 <script>
-  setTimeout(() => {
-    const seatDOM = document.getElementById('study2-seat24');
-    seatDOM.addEventListener('click', () => {
-      const seatChecked = seatDOM.getAttribute('seat-checked');
+  export default {
+    mounted() {
+      const seatDOM = window.document.getElementById('study2-seat24');
+      seatDOM.addEventListener('click', () => {
+        const seatChecked = seatDOM.getAttribute('seat-checked');
 
-      if (seatChecked === 'true') {
-        seatDOM.setAttribute('seat-checked', false);
-        setSeatUI(seatDOM, 'default');
-      } else {
-        seatDOM.setAttribute('seat-checked', true);
-        setSeatUI(seatDOM, 'select');
-      }
-    });
-  }, 500)
+        if (seatChecked === 'true') {
+          seatDOM.setAttribute('seat-checked', false);
+          setSeatUI(seatDOM, 'default');
+        } else {
+          seatDOM.setAttribute('seat-checked', true);
+          setSeatUI(seatDOM, 'select');
+        }
+      });
+    }
+  }
 
   function setSeatUI(wrapDOM, type) {
     let deskFillUrl = '';

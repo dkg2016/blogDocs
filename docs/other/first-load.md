@@ -38,7 +38,7 @@
       通用框架，尤其UI框架，因为功能丰富，组件引用，不可避免的存在体积过大的问题  
       和自己开发的相比，体积大很多，非必要，非必须，不引入第三方包  
       小程序移除 Vant 对 JS注入耗时对影响
-      ![An Image](../../assets/remove-vant.png)
+      ![An Image](/assets/remove-vant.png)
    3. **更好的网络**
    4. **资源缓存**
       #### 场景1: 浏览器 Storage
